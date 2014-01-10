@@ -18,6 +18,7 @@
         handle: null,
         container_width: 0,  // 0 == auto
         move_element: true,
+        disable_parent_select: false,
         helper: false  // or 'clone'
         // drag: function(e) {},
         // start : function(e, ui) {},
@@ -81,8 +82,10 @@
     };
 
     fn.events = function() {
+        if(!this.options.disable_parent_select){
         this.$container.on('selectstart.gridster-draggable',
             $.proxy(this.on_select_start, this));
+        }
 
         this.$container.on(pointer_events.start, this.options.items,
             $.proxy(this.drag_handler, this));
