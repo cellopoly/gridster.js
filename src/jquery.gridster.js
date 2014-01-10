@@ -39,7 +39,8 @@
             handle_append_to: '',
             handle_class: 'gs-resize-handle',
             max_size: [Infinity, Infinity]
-        }
+        },
+        disable_parent_select: false
     };
 
     /**
@@ -798,7 +799,8 @@
             drag: throttle(function(event, ui) {
                 self.on_drag.call(self, event, ui);
                 self.$el.trigger('gridster:drag');
-            }, 60)
+            }, 60),
+            disable_parent_select: this.options.disable_parent_select
           });
 
         this.drag_api = this.$el.drag(draggable_options);
@@ -824,7 +826,8 @@
                     this.on_stop_resize(event, ui);
                 }, this), 120);
             }, this),
-            drag: throttle($.proxy(this.on_resize, this), 60)
+            drag: throttle($.proxy(this.on_resize, this), 60),
+            disable_parent_select: this.options.disable_parent_select
         });
 
         return this;
